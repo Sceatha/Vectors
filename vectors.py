@@ -17,6 +17,25 @@ class Vector:
         result = Vector(vector)
         return result
 
+    def scale(self, number):
+        vector = [coordinate * number for coordinate in self.coordinates]
+        return Vector(vector)
+
+
+    def __mul__(self, other):
+        vector_set = self.same_dim(other)
+        product = 0
+        vector_1 = vector_set[0]
+        vector_2 = vector_set[1]
+        for i in range(len(vector_1)):
+            product += vector_1[i] * vector_2[i]
+        return product
+
+
+
+
+    # Helper methods:
+
     def same_dim(self, other):
         vectors = [self.coordinates, other.coordinates]
         if len(vectors[0]) == len(vectors[1]):
@@ -28,6 +47,8 @@ class Vector:
                 while len(vectors[1]) > len(vectors[0]):
                     vectors[0].append(0)
             return vectors
+
+
 
 
 # Test code:
