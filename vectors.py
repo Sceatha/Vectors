@@ -1,3 +1,5 @@
+import math
+
 class Vector:
 
     def __init__(self, coordinates):
@@ -6,6 +8,12 @@ class Vector:
 
     def __str__(self):
         return str(self.coordinates)
+
+    def __abs__(self):
+        result = 0
+        for coordinate in self.coordinates:
+            result += coordinate ** 2
+        return math.sqrt(result)
 
     def __add__(self, other):
         vector_set = self.same_dim(other)
