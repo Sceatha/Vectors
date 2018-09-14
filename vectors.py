@@ -2,29 +2,33 @@ class Vector:
 
     def __init__(self, coordinates):
         self.coordinates = coordinates
-        self.dim = len(coordinates) + 1
+        self.dim = len(coordinates)
 
+    def __str__(self):
+        return str(self.coordinates)
 
     def __add__(self, other):
-        vector_set = self.same_dim([self, other])
+        vector_set = self.same_dim(other)
         vector = []
         vector_1 = vector_set[0]
         vector_2 = vector_set[1]
-        for i in range(vector_1.dim - 1):
-            vector.append(vector_1.coordinates[i] + vector_2.coordinates[i])
-        return vector
+        for i in range(len(vector_1)):
+            vector.append(vector_1[i] + vector_2[i])
+        result = Vector(vector)
+        return result
 
-    def same_dim(self, vector_set):
-        if vector_set[0].dim == vector_set[1].dim:
-            return vector_set
+    def same_dim(self, other):
+        vectors = [self.coordinates, other.coordinates]
+        if len(vectors[0]) == len(vectors[1]):
+            return vectors
         else:
-            while vector_set[0].dim > vector_set[1].dim:
-                vector_set[1].coordinates.append(0)
-            while vector_set[1].dim > vector_set[0].dim:
-                vector_set[0].coordinates.append(0)
-            return vector_set
+            if len(vectors[0]) != len(vectors[1]):
+                while len(vectors[0]) > len(vectors[1]):
+                    vectors[1].append(0)
+                while len(vectors[1]) > len(vectors[0]):
+                    vectors[0].append(0)
+            return vectors
 
 
 # Test code:
 
-a = Vector
